@@ -9,8 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.xml.bind.DatatypeConverter;
 
+import jakarta.xml.bind.DatatypeConverter;
 public class RestClient {
 
 	private String username;
