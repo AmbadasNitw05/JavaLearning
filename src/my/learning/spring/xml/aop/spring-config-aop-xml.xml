@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/context/ 
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd ">
+    
+    <aop:config>
+    	<aop:aspect id="log" ref="logging">
+    		<aop:pointcut expression="execution(* my.learning.spring.xml.aop.*.*(..))" id="selectAll"/>
+    		
+    		<aop:before method="beforeAdvice" pointcut-ref="selectAll"/>
+    		<aop:after method="afterAdvice" pointcut-ref="selectAll"/>    		
+    		<aop:around method="aroundAdvice" pointcut-ref="selectAll"/>
+    		<aop:after-returning method="afterReturningAdvice" pointcut-ref="selectAll" returning="retVal"/>
+    		<aop:after-throwing method="afterThrowingAdvice" pointcut-ref="selectAll" throwing="ex"/>
+    	</aop:aspect>
+    </aop:config>
+    
+    <bean id="student" class="my.learning.spring.xml.aop.Student">
+    	<property name="name" value="Ambadas"></property>
+    	<property name="age" value="37"></property>
+    </bean>    
+    
+    <bean id="logging" class="my.learning.spring.xml.aop.Logging"></bean>
+    
+    <bean id="car" class="my.learning.spring.xml.beans.Car">
+    	<!-- <property name="model" value="Baleno"></property> -->
+    	<constructor-arg index="0" value="Baleno2"></constructor-arg>
+    	<!-- ref -> references to another bean, type -> used to resolve ambiguity  -->
+    </bean>
+	
+</beans>
