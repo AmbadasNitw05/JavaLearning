@@ -1,4 +1,4 @@
-package my.learning.test;
+package my.learning.collection;
 
 import java.util.HashMap;
 import java.util.Map;
