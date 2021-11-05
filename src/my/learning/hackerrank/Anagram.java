@@ -4,12 +4,31 @@ import java.util.Arrays;
 
 public class Anagram {
 
-	static boolean isAnagram(String a, String b) {
+	// best solution
+	 public static boolean isAnagram(String s, String t) {
+        int[] sCache = new int[26];
+        int[] tCache = new int[26];
+        for(char ch: s.toCharArray())
+            sCache[ch-'a']++;
+        
+        for(char ch: t.toCharArray())
+            tCache[ch-'a']++;
+        
+        for(int i=0; i<26; i++){
+            if(sCache[i] != tCache[i])
+                return false;
+        }
+        
+        return true;
+    }
+	 
+	// average solution
+	static boolean isAnagram2(String s, String t) {
 		
-		if(a.length() != b.length()) return false;
+		if(s.length() != t.length()) return false;
 		
-        char[] arr1 = a.toUpperCase().toCharArray();
-        char[] arr2 = b.toUpperCase().toCharArray();
+        char[] arr1 = s.toCharArray();
+        char[] arr2 = t.toCharArray();
         
         Arrays.sort(arr1);
         Arrays.sort(arr2);

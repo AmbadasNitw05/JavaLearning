@@ -45,6 +45,46 @@ public class ThreeSum {
 		
 		return output;
     }
+	
+	public List<List<Integer>> threeSum2(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if(len<3) return res;
+                
+        Arrays.sort(nums);
+        
+        for(int i=0; i<len-2;i++){
+            if(nums[i] > 0) break;
+            
+            if(i > 0 && nums[i] == nums[i-1]) continue; // avoid duplicates
+            
+            int left = i+1, right = len-1;
+            int target = 0 - nums[i];
+            while(left < right){
+                // avoid 2sum duplicate
+                if(left > i+1 && nums[left] == nums[left-1]){
+                    left++;
+                    continue;
+                }  
+                
+                int sum = nums[left] + nums[right];
+                
+                if(sum > target)
+                    right--;
+                else if(sum < target)
+                    left++;
+                else{
+                    res.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    continue;
+                }                    
+                
+            }
+        }
+        
+        return res;
+        
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

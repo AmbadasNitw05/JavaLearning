@@ -64,11 +64,45 @@ public class LongestPalindrome {
         
     }
 	
+	// palindrome test start from middle testing towards left and right
+	public String longestPalindrome3(String s) {
+        int len = s.length();
+        if(len < 2) return s;
+        int maxLen = 0;
+        String palindrome = "";
+        for(int i=0; i<len; i++){
+            // Odd length
+            int left = i, right=i;
+            while(left>=0 && right<len && s.charAt(left) == s.charAt(right)){
+                if(right-left+1 > maxLen){
+                    maxLen = right -left + 1;
+                    palindrome = s.substring(left, right+1);                    
+                }  
+                left--;
+                right++;
+            }
+            
+            // even length
+            left = i;
+            right = i + 1;
+            while(left>=0 && right<len && s.charAt(left) == s.charAt(right)){
+                if(right-left+1 > maxLen){
+                    maxLen = right -left + 1;
+                    palindrome = s.substring(left, right+1);                    
+                }  
+                left--;
+                right++;
+            }
+        }
+        
+        return palindrome;
+    }
+	
 	//  ababcd 
 	// dcbaba
 	
 	public static void main(String[] args) {
-		System.out.println(new LongestPalindrome().longestPalindrome("ababcd"));
+		System.out.println(new LongestPalindrome().longestPalindrome3("cbbd"));
 
 	}
 
