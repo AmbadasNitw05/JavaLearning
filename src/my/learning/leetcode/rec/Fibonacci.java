@@ -15,7 +15,7 @@ public class Fibonacci {
 	        return total;
 	    }
 
-	// recursion + memoization with map -> optimization
+	// recursion + memoization with map - top-down approach
 	Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 	public int fib2(int n) {
         if(n <= 1) return n;
@@ -25,11 +25,24 @@ public class Fibonacci {
         return total;
     }
 	
+	// tabulation + tabulation with map - bottom-up approach
+	public int fib3(int n) {
+		Map<Integer, Integer> tMap = new HashMap<Integer, Integer>();
+		tMap.put(0, 1);
+		tMap.put(1, 1);
+		if(n <= 1) return tMap.get(n);
+		for(int i=2; i<n; i++)
+			tMap.put(i, tMap.get(i-1) + tMap.get(i-2));
+		
+        
+        return tMap.get(n-1);
+    }
+	
 	// using iteration
 	public void iter(int n) {
-		int a = 0;
+		int a = 1;
 		int b = 1;
-		while(a<n) {
+		for(int i=0; i<n; i++){
 			System.out.println(a);
 			int temp = a;
 			a = b;
@@ -54,8 +67,13 @@ public class Fibonacci {
 	
 	public static void main(String[] args) {
 		Fibonacci f = new Fibonacci();
-		f.iter(7);
-		//System.out.println(f.tail(5, 0, 1));
+		int n = 7;
+		f.iter(n);
+		System.out.println("head recursion (backtrack): " + f.head(n));
+		System.out.println("tail recursion: " + f.tail(n, 0, 1));
+		System.out.println("recursion+memoization (array cache): " + f.fib(n));
+		System.out.println("recursion+memoization (hashmap cache): " + f.fib2(n));
+		System.out.println("iteration+tabulation (hashmap cache): " + f.fib3(n));
 
 	}
 

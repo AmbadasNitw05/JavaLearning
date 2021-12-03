@@ -20,7 +20,8 @@ public class Palindrome {
         while(i < j) {
         	while(i<len && !Character.isLetterOrDigit(s.charAt(i))) i++;
         	while(j>=0 && !Character.isLetterOrDigit(s.charAt(j))) j--;
-        	if(i<len && j>=0 && Character.toUpperCase(s.charAt(i)) != Character.toUpperCase(s.charAt(j))) return false;
+        	if(i<len && j>=0 && Character.toUpperCase(s.charAt(i)) != Character.toUpperCase(s.charAt(j))) 
+        		return false;
         	i++;
         	j--;
         }
